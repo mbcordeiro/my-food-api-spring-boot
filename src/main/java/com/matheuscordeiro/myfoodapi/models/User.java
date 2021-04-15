@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Builder
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +16,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+
+    @OneToOne(mappedBy = "user")
+    private Costumer costumer;
 }
