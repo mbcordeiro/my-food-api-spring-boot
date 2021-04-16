@@ -16,6 +16,7 @@ public class Costumer {
     private String name;
     private Integer phone;
     private String cpf;
+    private boolean isActive;
 
     @OneToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
