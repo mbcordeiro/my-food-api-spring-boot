@@ -14,5 +14,5 @@ public interface CostumerService {
 
     Costumer updateCostumer(Costumer costumer);
 
-    boolean inactivateCostumer(boolean isActive);
+    boolean inactivateCostumer(boolean isActive, Long id);
 }

@@ -40,8 +40,11 @@ public class CostumerServiceImpl implements CostumerService {
     }
 
     @Override
-    public boolean inactivateCostumer(boolean isActive) {
-        return false;
+    public boolean inactivateCostumer(boolean isActive, Long id) {
+        Costumer costumer = verifyIfExists(id);
+        costumer.setActive(isActive);
+        updateCostumer(costumer);
+        return costumer.isActive();
     }
 
     private Costumer verifyIfExists(Long id) {
