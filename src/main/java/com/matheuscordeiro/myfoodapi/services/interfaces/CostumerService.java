@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services.interfaces;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Costumer;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface CostumerService {
 
     Costumer saveCostumer(Costumer costumer);
 
-    Costumer updateCostumer(Costumer costumer);
+    Costumer updateCostumer(Costumer costumer) throws ObjectNotFoundException;
 
-    boolean inactivateCostumer(boolean isActive, Long id);
+    boolean inactivateCostumer(boolean isActive, Long id) throws ObjectNotFoundException;
 }

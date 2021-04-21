@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.controllers;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.User;
 import com.matheuscordeiro.myfoodapi.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateUser(@RequestBody @Valid User user) {
+    public ResponseEntity<Void> updateUser(@RequestBody @Valid User user) throws ObjectNotFoundException {
         userService.updateUser(user);
         return ResponseEntity.noContent().build();
     }

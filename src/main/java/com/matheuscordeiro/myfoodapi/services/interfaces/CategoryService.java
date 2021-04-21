@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services.interfaces;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Category;
 import org.springframework.data.domain.Pageable;
 
@@ -13,9 +14,9 @@ public interface CategoryService {
 
     Category saveCategory(Category category);
 
-    Category updateCategory(Category category);
+    Category updateCategory(Category category) throws ObjectNotFoundException;
 
-    void deleteCategoryById(Long id);
+    void deleteCategoryById(Long id) throws ObjectNotFoundException;
 
     public Pageable findPaginatedCategories();
 }

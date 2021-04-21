@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Category;
 import com.matheuscordeiro.myfoodapi.repositories.CategoryRepository;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CategoryService;
@@ -12,6 +13,8 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+    private static final String CATEGORY = "Category";
+
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -31,13 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Category category) {
+    public Category updateCategory(Category category) throws ObjectNotFoundException {
         verifyIfExists(category.getId());
         return categoryRepository.save(category);
     }
 
     @Override
-    public void deleteCategoryById(Long id) {
+    public void deleteCategoryById(Long id) throws ObjectNotFoundException {
         verifyIfExists(id);
         categoryRepository.deleteById(id);
     }
@@ -47,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
-    private Category verifyIfExists(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    private Category verifyIfExists(Long id) throws ObjectNotFoundException {
+        return categoryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(CATEGORY, id));
     }
 }

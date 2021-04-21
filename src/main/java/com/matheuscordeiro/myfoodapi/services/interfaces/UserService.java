@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services.interfaces;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.User;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface UserService {
 
     User saveUser(User user);
 
-    User updateUser(User user);
+    User updateUser(User user) throws ObjectNotFoundException;
 
     boolean inactivateUser();
 }

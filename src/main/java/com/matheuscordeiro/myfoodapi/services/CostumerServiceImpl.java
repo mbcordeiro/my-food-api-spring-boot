@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Costumer;
 import com.matheuscordeiro.myfoodapi.repositories.CostumerRepository;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CostumerService;
@@ -12,6 +13,8 @@ import java.util.Optional;
 
 @Service
 public class CostumerServiceImpl implements CostumerService {
+    private static final String COSTUMER = "Costumer";
+
     @Autowired
     CostumerRepository costumerRepository;
 
@@ -34,20 +37,20 @@ public class CostumerServiceImpl implements CostumerService {
 
     @Transactional
     @Override
-    public Costumer updateCostumer(Costumer costumer) {
+    public Costumer updateCostumer(Costumer costumer) throws ObjectNotFoundException {
         verifyIfExists(costumer.getId());
         return costumerRepository.save(costumer);
     }
 
     @Override
-    public boolean inactivateCostumer(boolean isActive, Long id) {
+    public boolean inactivateCostumer(boolean isActive, Long id) throws ObjectNotFoundException {
         Costumer costumer = verifyIfExists(id);
         costumer.setActive(isActive);
         updateCostumer(costumer);
         return costumer.isActive();
     }
 
-    private Costumer verifyIfExists(Long id) {
-        return costumerRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    private Costumer verifyIfExists(Long id) throws ObjectNotFoundException {
+        return costumerRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(COSTUMER, id));
     }
 }

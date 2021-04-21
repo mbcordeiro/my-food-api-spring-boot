@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.controllers;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Costumer;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CostumerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class CostumerController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCostumer(@RequestBody @Valid Costumer costumer) {
+    public ResponseEntity<Void> updateCostumer(@RequestBody @Valid Costumer costumer) throws ObjectNotFoundException {
         costumerService.updateCostumer(costumer);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> inactiveCostumer(@RequestBody @Valid Costumer costumer) {
+    public ResponseEntity<Void> inactiveCostumer(@RequestBody @Valid Costumer costumer) throws ObjectNotFoundException {
         costumerService.inactivateCostumer(costumer.isActive(), costumer.getId());
         return ResponseEntity.noContent().build();
     }

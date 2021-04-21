@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.controllers;
 
+import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Category;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class CategoryController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCategory(@RequestBody @Valid Category category) {
+    public ResponseEntity<Void> updateCategory(@RequestBody @Valid Category category) throws ObjectNotFoundException {
         categoryService.updateCategory(category);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategoryById(@PathVariable Long id) {
+    public void deleteCategoryById(@PathVariable Long id) throws ObjectNotFoundException {
         categoryService.deleteCategoryById(id);
     }
 }
