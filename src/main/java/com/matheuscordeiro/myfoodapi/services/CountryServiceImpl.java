@@ -6,10 +6,12 @@ import com.matheuscordeiro.myfoodapi.models.Restaurant;
 import com.matheuscordeiro.myfoodapi.repositories.CountryRepository;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CountryServiceImpl implements CountryService {
     private static final String COUNTRY = "Country";
 
