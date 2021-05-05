@@ -6,8 +6,10 @@ import com.matheuscordeiro.myfoodapi.services.interfaces.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,10 @@ public class StateController {
 
     @PostMapping
     public ResponseEntity<State> saveState(@RequestBody @Valid State state) {
-        return ResponseEntity.ok(stateService.saveState(state));
+        state = stateService.saveState(state);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(state.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping

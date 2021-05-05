@@ -6,8 +6,10 @@ import com.matheuscordeiro.myfoodapi.services.interfaces.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,10 @@ public class CityController {
 
     @PostMapping
     public ResponseEntity<City> saveCity(@RequestBody @Valid City city) {
-        return ResponseEntity.ok(cityService.saveCity(city));
+        city = cityService.saveCity(city);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(city.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping

@@ -6,8 +6,10 @@ import com.matheuscordeiro.myfoodapi.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,10 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody @Valid User user) {
-        return ResponseEntity.ok(userService.saveUser(user));
+        user = userService.saveUser(user);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping

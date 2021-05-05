@@ -6,8 +6,10 @@ import com.matheuscordeiro.myfoodapi.services.interfaces.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,10 @@ public class CountryController {
 
     @PostMapping
     public ResponseEntity<Country> saveCountry(@RequestBody @Valid Country country) {
-        return ResponseEntity.ok(countryService.saveCountry(country));
+        country = countryService.saveCountry(country);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(country.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping
