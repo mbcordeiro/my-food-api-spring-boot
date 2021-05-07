@@ -42,7 +42,7 @@ public class CostumerController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping
+    @PutMapping("/inactive")
     public ResponseEntity<Void> inactiveCostumer(@RequestBody @Valid Costumer costumer) throws ObjectNotFoundException {
         costumerService.inactivateCostumer(costumer.isActive(), costumer.getId());
         return ResponseEntity.noContent().build();
