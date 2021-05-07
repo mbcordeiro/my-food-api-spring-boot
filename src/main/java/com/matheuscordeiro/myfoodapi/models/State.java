@@ -24,6 +24,5 @@ public class State {
 
     @JsonIgnore
     @OneToMany(mappedBy = "state")
-    @JoinColumn(name = "city_id")
-    private List<City> cities = new ArrayList<>();
+    private List<City> cities;
 }

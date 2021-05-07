@@ -1,7 +1,10 @@
 package com.matheuscordeiro.myfoodapi.config;
 
+import io.github.jhipster.config.JHipsterConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,8 +14,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
+@Primary
+@Profile(JHipsterConstants.SPRING_PROFILE_SWAGGER)
 @Configuration
+@EnableSwagger2
 public class SwaggerConfig {
     @Bean
     public Docket docket() {
@@ -26,14 +31,14 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("My food api")
-                .description("Api project ecommerce , delivery and payment of food from restaurants ")
+                .description("Api project ecommerce, delivery and payment of food from restaurants ")
                 .version("1.0")
                 .contact(contact())
                 .build();
     }
 
     private Contact contact() {
-        return new Contact("Matheus Cordeiro", "http://github.com/matheusBCordeiro", "matheusdebarroscordeiro@gmail.com");
+        return new Contact("Matheus Cordeiro", "http://github.com/mbcordeiro", "matheusdebarroscordeiro@gmail.com");
     }
 }
 

@@ -14,4 +14,7 @@ public class RestaurantSpecialty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String specialty;
+
+    @OneToOne(mappedBy = "restaurantSpecialty")
+    private Restaurant restaurant;
 }

@@ -23,7 +23,6 @@ public class RestaurantAddress {
     @JoinColumn(name="city_id")
     private City city;
 
-    @OneToOne(mappedBy = "restaurant_address")
-    @JoinColumn(name = "restaurant_id")
+    @OneToOne(mappedBy = "restaurantAddress")
     private Restaurant restaurant;
 }

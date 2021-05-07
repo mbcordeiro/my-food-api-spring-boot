@@ -41,7 +41,7 @@ public class Restaurant {
     @JoinColumn(name = "restaurant_address_id", referencedColumnName = "id")
     private RestaurantAddress restaurantAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_specialty_id", referencedColumnName = "id")
-    private List<RestaurantSpecialty> restaurantSpecialties;
+    private RestaurantSpecialty restaurantSpecialty;
 }

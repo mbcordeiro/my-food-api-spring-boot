@@ -17,10 +17,11 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @Size(max = 2)
     private String initials;
 
     @JsonIgnore
     @OneToMany(mappedBy = "country")
-    private List<State> states = new ArrayList<>();
+    private List<State> states;
 }
