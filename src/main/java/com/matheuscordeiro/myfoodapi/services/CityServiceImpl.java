@@ -1,7 +1,6 @@
 package com.matheuscordeiro.myfoodapi.services;
 
 import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
-import com.matheuscordeiro.myfoodapi.models.Category;
 import com.matheuscordeiro.myfoodapi.models.City;
 import com.matheuscordeiro.myfoodapi.repositories.CityRepository;
 import com.matheuscordeiro.myfoodapi.services.interfaces.CityService;

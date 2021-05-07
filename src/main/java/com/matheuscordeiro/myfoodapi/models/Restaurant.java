@@ -1,5 +1,6 @@
 package com.matheuscordeiro.myfoodapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -44,4 +45,11 @@ public class Restaurant {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_specialty_id", referencedColumnName = "id")
     private RestaurantSpecialty restaurantSpecialty;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "restaurants_categories",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_category_id"))
+    private List<RestaurantCategory> restaurantCategories;
 }

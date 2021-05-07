@@ -1,8 +1,8 @@
 package com.matheuscordeiro.myfoodapi.controllers;
 
 import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
-import com.matheuscordeiro.myfoodapi.models.Category;
-import com.matheuscordeiro.myfoodapi.services.interfaces.CategoryService;
+import com.matheuscordeiro.myfoodapi.models.RestaurantCategory;
+import com.matheuscordeiro.myfoodapi.services.interfaces.RestaurantCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,37 +13,37 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/restaurant/categories")
 public class CategoryController {
     @Autowired
-    CategoryService categoryService;
+    RestaurantCategoryService restaurantCategoryService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> getCategories() {
-        return ResponseEntity.ok(categoryService.findCategories());
+    public ResponseEntity<List<RestaurantCategory>> getRestaurantCategories() {
+        return ResponseEntity.ok(restaurantCategoryService.findRestaurantCategories());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoriesById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.findCategoryById(id).get());
+    public ResponseEntity<RestaurantCategory> getRestaurantCategoriesById(@PathVariable Long id) {
+        return ResponseEntity.ok(restaurantCategoryService.findRestaurantCategoryById(id).get());
     }
 
     @PostMapping
-    public ResponseEntity<Category> saveCategory(@RequestBody @Valid Category category) {
-        category = categoryService.saveCategory(category);
+    public ResponseEntity<RestaurantCategory> saveRestaurantCategory(@RequestBody @Valid RestaurantCategory restaurantCategory) {
+        restaurantCategory = restaurantCategoryService.saveRestaurantCategory(restaurantCategory);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(category.getId()).toUri();
+                .path("/{id}").buildAndExpand(restaurantCategory.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCategory(@RequestBody @Valid Category category) throws ObjectNotFoundException {
-        categoryService.updateCategory(category);
+    public ResponseEntity<Void> updateRestaurantCategory(@RequestBody @Valid RestaurantCategory restaurantCategory) throws ObjectNotFoundException {
+        restaurantCategoryService.updateRestaurantCategory(restaurantCategory);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategoryById(@PathVariable Long id) throws ObjectNotFoundException {
-        categoryService.deleteCategoryById(id);
+    public void deleteRestaurantCategoryById(@PathVariable Long id) throws ObjectNotFoundException {
+        restaurantCategoryService.deleteRestaurantCategoryById(id);
     }
 }
