@@ -2,6 +2,7 @@ package com.matheuscordeiro.myfoodapi.services.interfaces;
 
 import com.matheuscordeiro.myfoodapi.exceptions.ObjectNotFoundException;
 import com.matheuscordeiro.myfoodapi.models.Restaurant;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface RestaurantService {
 
     void deleteRestaurantById(Long id) throws ObjectNotFoundException;
 
-    public Pageable findPaginatedCategories();
+    public Page findPaginatedRestaurants(Integer page, Integer linesPerPage, String orderBy, String direction);
 }

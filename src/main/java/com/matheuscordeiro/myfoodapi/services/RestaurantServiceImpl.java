@@ -5,7 +5,10 @@ import com.matheuscordeiro.myfoodapi.models.Restaurant;
 import com.matheuscordeiro.myfoodapi.repositories.RestaurantRepository;
 import com.matheuscordeiro.myfoodapi.services.interfaces.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,8 +49,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Pageable findPaginatedCategories() {
-        return null;
+    public Page findPaginatedRestaurants(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        Pageable restaurantPageable = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return restaurantRepository.findAll(restaurantPageable);
     }
 
     private Restaurant verifyIfExists(Long id) throws ObjectNotFoundException {
